@@ -9,13 +9,35 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #000000;
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 97%, #FFCC70 99%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+.swiper {
+  width: 60vw;
+  height: 60vw;
+  max-width: 500px;
+  max-height: 500px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
 }

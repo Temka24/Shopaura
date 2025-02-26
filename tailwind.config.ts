@@ -12,6 +12,13 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontWeight: {
+        light: '300'
+      },
+      screens: {
+        'lg': '1024px',
+        'cu': '350px'
+      }
     },
   },
   plugins: [],
