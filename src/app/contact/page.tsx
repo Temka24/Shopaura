@@ -15,7 +15,7 @@ const Map = dynamic(() => import("@/components/map"), { ssr: false, loading: () 
 
 const Contact: React.FC = () => {
 
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+    const [formData, setFormData] = useState<{name: string, email: string, message: string;}>({ name: '', email: '', message: '' })
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()

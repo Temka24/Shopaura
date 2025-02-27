@@ -4,6 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { useCard } from "@/components/cardContext";
+import { IProduct } from "@/model/ProductModel";
+import { UserDataType } from "@/types/userTypes";
 
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
@@ -19,15 +21,15 @@ const Shop: React.FC = () => {
 
     const { addToCard, card, setCard } = useCard()
 
-    const [products, setProducts] = useState<any[]>([])
-    const [userData, setUserData] = useState<any>(null)
-    const [slectedProduct, setSlectedProduct] = useState<any>(null)
+    const [products, setProducts] = useState<IProduct[]>([])
+    const [userData, setUserData] = useState<UserDataType | null>(null)
+    const [slectedProduct, setSlectedProduct] = useState<IProduct | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [cardButtonLoading, setCardButtonLoading] = useState<boolean>(false)
 
 
-    const [maxPrice, setMaxPrice] = useState<any>(null)
-    const [minPrice, setMinPrice] = useState<any>(null)
+    const [maxPrice, setMaxPrice] = useState<number>(0)
+    const [minPrice, setMinPrice] = useState<number>(0)
     const [rangeVal, setRangeVal] = useState<number[]>([0, 10])
     const [sortPrice, setSortPrice] = useState<string>("")
     const [sortDate, setSortDate] = useState<string>("")
@@ -105,8 +107,8 @@ const Shop: React.FC = () => {
     useEffect(() => {
         if (!products) { return }
 
-        var Allprices: any[] = [];
-        products.forEach((product) => Allprices.push(product.price))
+        var Allprices: number[] = [];
+        products.forEach((product) => Allprices.push(product.price as number))
 
         var newMax = Math.max(...Allprices as number[])
         var newMin = Math.min(...Allprices as number[])
@@ -134,10 +136,10 @@ const Shop: React.FC = () => {
         if (sortDate) {
             filtered = filtered.sort((a, b) => {
                 if (sortDate === "Oldest to Newest") {
-                    return Number(new Date(a.createdAt)) - Number(new Date(b.createdAt))
+                    return Number(new Date(a.createdAt as Date)) - Number(new Date(b.createdAt as Date))
                 }
                 else if (sortDate === "Newest to Oldest") {
-                    return Number(new Date(b.createdAt)) - Number(new Date(a.createdAt))
+                    return Number(new Date(b.createdAt as Date)) - Number(new Date(a.createdAt as Date))
                 }
                 return 0;
             })
@@ -162,10 +164,10 @@ const Shop: React.FC = () => {
         setCardButtonLoading(true)
         try {
             const res = await axios.post(`/api/user/card/addAndDeleteToCard`,
-                { productId: slectedProduct._id },
+                { productId: slectedProduct?._id },
                 {
                     params: {
-                        userId: userData.id,
+                        userId: userData?.id,
                         isType: "add"
                     }
                 }
@@ -292,10 +294,10 @@ const Shop: React.FC = () => {
                             </div>
                             <div className="flex flex-col items-start justify-center gap-[30px] text-[25px] relative">
                                 <div className="font-extrabold text-[30px]">Name: {slectedProduct.name}</div>
-                                <div><span className="font-[1000]">Product ID:</span> {slectedProduct._id}</div>
+                                <div><span className="font-[1000]">Product ID:</span> {slectedProduct._id as string}</div>
                                 <div>Price: {slectedProduct.price} $</div>
                                 <div>Description: {slectedProduct.description}</div>
-                                <div>Date: {slectedProduct.createdAt}</div>
+                                <div>Date: {slectedProduct.createdAt ? new Date(slectedProduct.createdAt).toLocaleDateString(): "Unknown"}</div>
                                 <Button
                                     variant="contained"
                                     className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px] w-[80%]"

@@ -5,13 +5,14 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
 import toast from "react-hot-toast";
+import { UserDataType } from "@/types/userTypes";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
-const checkout: React.FC = () => {
+const Checkout: React.FC = () => {
 
-    const [delivery, setDelivery] = useState<any>({ country: "", state: "", city: "", address: "", postalCode: "" })
-    const [userData, setUserData] = useState<any>(null)
+    const [delivery, setDelivery] = useState<{country: string, state: string; city: string, address: string; postalCode: string}>({ country: "", state: "", city: "", address: "", postalCode: "" })
+    const [userData, setUserData] = useState<UserDataType | null>(null)
     const [cardItems, setCardItems] = useState<any[] | null>(null)
     const [btnLoading, setBtnLoading] = useState<boolean>(false)
 
@@ -64,7 +65,7 @@ const checkout: React.FC = () => {
         try {
             // Төлбөрийн мэдээлэл (cardItems болон address)-ийг сервер руу илгээж, session үүсгэх
 
-            const res = await axios.post("/api/checkout", { userId: userData.id, cardItems, delivery });
+            const res = await axios.post("/api/checkout", { userId: userData?.id, cardItems, delivery });
 
             // Stripe-ийг ачаалахад алдаа гарах магадлалтай, заавал ачаалагдсан эсэхийг шалгах
             const stripe = await stripePromise;
@@ -145,4 +146,4 @@ const checkout: React.FC = () => {
     )
 }
 
-export default checkout
+export default Checkout;

@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
                 }
             </div>
 
-            <div className={`flex lg:flex-row lg:h-[70px] flex-col items-center lg:gap-[10vw] gap-[20px] pt-[10px] backdrop-blur-lg bg-opacity-25 bg-black z-[10] fixed w-[100vw] top-0 ${(!isMenuOpen) && ('ml-[100vw]')} duration-300 pb-[40px] lg:pb-0`}>
+            <div className={`flex lg:flex-row lg:h-[70px] flex-col items-center lg:gap-[10vw] gap-[20px] pt-[10px] backdrop-blur-lg bg-opacity-25 bg-black z-[10] fixed w-[100vw] top-0 ${(!isMenuOpen && !isLargeWidth) && ('ml-[100vw]')} duration-300 pb-[40px] lg:pb-0`}>
 
                 <Link href="/" onClick={() => setIsMenuOpen(false)} className='flex flex-row ml-[10vw] items-center translate-x-[-4vw]'>
                     <Image

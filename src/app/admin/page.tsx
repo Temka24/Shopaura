@@ -4,6 +4,8 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { UserDataType } from '@/types/userTypes';
+import { IOrder } from '@/model/OrderModel';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -33,8 +35,8 @@ const VisuallyHiddenInput = styled('input')({
 
 const Admin: React.FC<MyProps> = () => {
 
-    const [userData, setUserData] = useState<any>(null)
-    const [orders, setOrders] = useState<any>(null)
+    const [userData, setUserData] = useState<UserDataType | null>(null)
+    const [orders, setOrders] = useState<IOrder[] | null>(null)
 
     const [productName, setProductName] = useState<string>('')
     const [productPrice, setProductPrice] = useState('')
@@ -70,7 +72,7 @@ const Admin: React.FC<MyProps> = () => {
             router.push("/account")
         }
 
-    }, [userData])
+    }, [userData, router])
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -226,7 +228,11 @@ const Admin: React.FC<MyProps> = () => {
                             />
                             {previewImage && (
                                 <div className="mt-4">
-                                    <img src={previewImage} alt="Preview" className="w-[30px] h-[30px] object-cover rounded-[50%]" />
+                                    <Image 
+                                        src={previewImage}
+                                        alt='preview'
+                                        className='w-[30px] h-[30px] object-cover rounded-[50%]'
+                                    />
                                 </div>
                             )}
                             <Button

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Button from '@mui/material/Button';
 import Tilt from "react-parallax-tilt";
@@ -9,9 +9,6 @@ import CachedIcon from '@mui/icons-material/Cached';
 import CallIcon from '@mui/icons-material/Call';
 import { green } from '@mui/material/colors';
 import { useRouter } from "next/navigation";
-import { useCard } from "@/components/cardContext";
-import toast from "react-hot-toast";
-import axios from "axios";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -22,53 +19,7 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 const Home: React.FC = () => {
 
-  const [userData, setUserData] = useState<any>(null)
-  const { setCard } = useCard()
-
   const router = useRouter()
-
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      toast.error('Token is invalid')
-    }
-    const localFromData = localStorage.getItem("userData")
-
-    if (localFromData) {
-      setUserData(JSON.parse(localFromData))
-    }
-    else if (!localFromData) {
-      toast.error("userdata connet find")
-    }
-
-  }, [])
-
-  useEffect(() => {
-
-    if (!userData) {
-      return;
-    }
-
-    const fillCard = async () => {
-      try {
-        const response = await axios.get(`/api/user/card?userId=${userData.id}`);
-        if (response.data.status) {
-          toast.success(response.data.msg)
-          setCard(response.data.items)
-        }
-        else if (!response.data.status) {
-          toast.error(response.data.msg)
-          console.error(response.data)
-        }
-
-      } catch (err: any) {
-        console.error(err)
-      }
-    }
-
-    fillCard()
-
-  }, [userData])
-
 
   return (
     <>
@@ -82,13 +33,13 @@ const Home: React.FC = () => {
             shop now
           </Button>
           <Tilt className="absolute right-[11vw] lg:mt-[-200px]" tiltMaxAngleX={10} tiltMaxAngleY={10} transitionSpeed={200} >
-            <div className="w-full cu:w-[40vw] lg:w-[41vw] cu:mt-[240px] lg:mt-[-300px]">
+            <div className="cu:w-[40vw] lg:w-[35vw] cu:mt-[240px] lg:mt-[100px]">
               <Image
                 src="/huhuh.png"
                 alt="sneaker"
                 height={300}
                 width={300}
-                className="w-full h-auto object-cover"
+                className="w-full object-cover lg:mt-[250px] max-w-[400px]"
               />
             </div>
           </Tilt>

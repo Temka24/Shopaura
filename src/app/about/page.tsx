@@ -13,13 +13,13 @@ const About: React.FC = () => {
             <div>
                 <div className="w-[100vw] h-[300px] backdrop-blur-sm bg-opacity-[0.10] bg-black rounded-b-[80px] pt-[100px] relative">
                     <div className="text-[60px] ml-[15vw] mt-[50px]">About Us</div>
-                    <div className="w-[50vw] max-w-[500px] max-h-[500px]">
+                    <div className="w-[50vw] max-w-[500px] max-h-[500px] lg:ml-[5vw]">
                         <Image
                             src="/shop_as-removebg-preview.png"
                             height={400}
                             width={500}
                             alt="notebook"
-                            className="lg:absolute lg:right-0 top-[-250px] left-[60vw] cu:ml-[-20vw] w-full h-auto object-cover cu:relative"
+                            className="lg:right-0 top-[-250px] left-[60vw] cu:ml-[-20vw] w-full h-auto object-cover cu:relative"
                         />
                     </div>
                 </div>

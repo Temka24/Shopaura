@@ -1,14 +1,16 @@
 'use client'
 import React, { useState, useContext, createContext } from 'react'
 import toast from 'react-hot-toast'
+import { CardType } from '@/types/userTypes'
+import { IProduct } from '@/model/ProductModel'
 
 const CardContext = createContext<{
-    card: any[],
+    card: CardType[],
     setCard: React.Dispatch<React.SetStateAction<any[]>>,
-    addToCard: (product: any) => void,
-    removeFromCard: (productId: any) => void,
-    incrementQuantity: (productId: any) => void,
-    decrementQuantity: (productId: any) => void
+    addToCard: (product: IProduct) => void,
+    removeFromCard: (productId: string) => void,
+    incrementQuantity: (productId: string) => void,
+    decrementQuantity: (productId: string) => void
 }>({
     card: [],
     setCard: () => { },
@@ -20,9 +22,9 @@ const CardContext = createContext<{
 
 
 const CardProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-    const [card, setCard] = useState<any[]>([]);
+    const [card, setCard] = useState<CardType[]>([]);
 
-    const addToCard = (product: any) => {
+    const addToCard = (product: IProduct) => {
         const exist = card.find((item) => item.product._id == product._id)
         if (exist) {
             toast.error("Already exist")
@@ -30,15 +32,15 @@ const CardProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         }
         setCard([...card, { product, quantity: 1 }])
     }
-    const removeFromCard = (productId: any) => {
+    const removeFromCard = (productId: string) => {
         setCard(card.filter((item) => item.product._id != productId))
         toast.success("Remove")
     }
-    const incrementQuantity = (productId: any) => {
+    const incrementQuantity = (productId: string) => {
         setCard(card.map((item) => item.product._id == productId ? { ...item, quantity: item.quantity + 1 } : item ))
         toast.success("IncContext")
     }
-    const decrementQuantity = (productId: any) => {
+    const decrementQuantity = (productId: string) => {
         setCard(card.map((item) => (item.product._id == productId && item.quantity > 1) ? { ...item, quantity: item.quantity - 1 } : item))
         toast.success("DecContext")
     }

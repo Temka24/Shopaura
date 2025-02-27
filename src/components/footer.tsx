@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
     return (
         <>
             <div className="flex items-center justify-center lg:gap-[20vw] cu:gap-[13vw] pb-[50px] pt-0 backdrop-blur-lg bg-opacity-25 bg-black p-0 cu:px-[100px]">
-                <div className="flex flex-col items-center justify-center gap-[20px] cu:scale-[0.7]">
+                <div className="flex flex-col items-center justify-center gap-[20px] cu:scale-[0.7] lg:scale-[1]">
                     <Image
                         src="/logog.png"
                         alt="Logo"
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                         <p onClick={() => router.push("/contact")}>Contact</p>
                     </div>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-[10px] font-normal cu:scale-[0.7] cu:ml-[-20vw]">
+                <div className="flex flex-col items-center justify-center gap-[10px] font-normal cu:scale-[0.7] lg:scale-[1] lg:ml-[6vw] cu:ml-[-20vw]">
                     <h1 className="cu:text-[15px] text-nowrap">Powered by <span className="font-bold">Shopaura</span></h1>
                     <div className="text-nowrap">Copyright © 2025 Shopaura</div>
                 </div>

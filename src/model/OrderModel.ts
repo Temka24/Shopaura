@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, models, Document } from "mongoose";
 
-interface IOrder extends Document {
+export interface IOrder extends Document {
     items: {
         product: mongoose.Types.ObjectId;
         quantity: number;

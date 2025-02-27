@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, MouseEventHandler, HTMLAttributes } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
@@ -8,6 +8,8 @@ import { useCard } from "@/components/cardContext";
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { UserDataType } from "@/types/userTypes";
+import { CardType } from "@/types/userTypes";
 
 
 const Card: React.FC = () => {
@@ -16,9 +18,9 @@ const Card: React.FC = () => {
     const { card, removeFromCard, incrementQuantity, decrementQuantity } = useCard()
     const [removeBtnLoading, setRemoveBtnLoading] = useState<boolean>(false)
 
-    const [cardItems, setCardItems] = useState<any[] | null>(null)
-    const [userData, setUserData] = useState<any>(null)
-    const [overAllPrice, setOverAllPrice] = useState<any>(null)
+    const [cardItems, setCardItems] = useState<CardType[] | null>(null)
+    const [userData, setUserData] = useState<UserDataType | null>(null)
+    const [overAllPrice, setOverAllPrice] = useState<number>(0)
 
     useEffect(() => {
         if (!localStorage.getItem('token')) {
@@ -44,7 +46,7 @@ const Card: React.FC = () => {
 
     useEffect(() => {
         const newTotalPrice = cardItems?.reduce((acc, item) => acc + (item.product.price * item.quantity) as number, 0)
-        setOverAllPrice(newTotalPrice)
+        setOverAllPrice(newTotalPrice as number)
 
     }, [cardItems])
 
@@ -55,7 +57,7 @@ const Card: React.FC = () => {
                 { productId },
                 {
                     params: {
-                        userId: userData.id,
+                        userId: userData?.id,
                         isType: "inc"
                     }
                 }
@@ -82,7 +84,7 @@ const Card: React.FC = () => {
                 { productId },
                 {
                     params: {
-                        userId: userData.id,
+                        userId: userData?.id,
                         isType: "dec"
                     }
                 }
@@ -112,7 +114,7 @@ const Card: React.FC = () => {
                 { productId },
                 {
                     params: {
-                        userId: userData.id,
+                        userId: userData?.id,
                         isType: "delete"
                     }
                 }
@@ -163,7 +165,7 @@ const Card: React.FC = () => {
                         ) : (
                             <div className="flex flex-col items-center justify-center gap-[40px]">
                                 {
-                                    cardItems.map((item, index) =>
+                                    cardItems.map((item: CardType, index) =>
                                         <div key={index} className="flex flex-row items-center justify-start gap-[10vw] rounded-[20px] py-[30px] px-[4vw] shadow-[0_0_10px] shadow-sky-300">
                                             <Image
                                                 src={item.product.productImage}
@@ -187,7 +189,7 @@ const Card: React.FC = () => {
                                             <div>
                                                 <div>Total price: {item.product.price * item.quantity}$</div>
                                                 <div className="flex flex-row justify-center items-center gap-[20px] mt-[30px]">
-                                                    <span onClick={() => handleIncrement(item.product._id)} className="cursor-pointer">
+                                                    <span onClick={() => handleIncrement(item.product._id as string)} className="cursor-pointer">
                                                         <AddIcon sx={{ fontSize: 40 }} />
                                                     </span>
                                                     <span className="bg-purple-600 text-center px-[15px] py-[6px] text-[25px] rounded-[10px]">{item.quantity}</span>

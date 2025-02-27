@@ -13,7 +13,7 @@ interface MyProps {
 
 const Login: React.FC<MyProps> = ({ isOpenLogin, setIsOpenLogin, setIsAuthed }) => {
 
-    const [formData, setFormData] = useState({ email: '', password: '' })
+    const [formData, setFormData] = useState<{ email: string; password: string; }>({ email: '', password: '' })
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const handleLogin = async (e: React.FormEvent) => {

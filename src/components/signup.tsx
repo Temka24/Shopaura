@@ -6,6 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Image from "next/image";
 
 
 interface MyProps {
@@ -82,7 +83,11 @@ const Signup: React.FC<MyProps> = ({ isOpenLogin, setIsOpenLogin, setIsAuthed })
                 <div className="text-[25px]">Sign up</div>
                 {previewImage && (
                     <div className="mt-4">
-                        <img src={previewImage} alt="Preview" className="w-[30px] h-[30px] object-cover rounded-[50%]" />
+                        <Image
+                            src={previewImage}
+                            alt='preview'
+                            className='w-[30px] h-[30px] object-cover rounded-[50%]'
+                        />
                     </div>
                 )}
                 <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-[20px]">

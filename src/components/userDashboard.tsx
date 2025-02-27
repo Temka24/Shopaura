@@ -4,6 +4,8 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { UserDataType } from '@/types/userTypes';
+import { IOrder } from '@/model/OrderModel';
 
 import Button from '@mui/material/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -17,8 +19,8 @@ interface MyProps {
 
 const Dashboard: React.FC<MyProps> = ({ setIsAuthed }) => {
 
-    const [userData, setUserData] = useState<any>(null)
-    const [orders, setOrders] = useState<any>(null)
+    const [userData, setUserData] = useState<UserDataType | null>(null)
+    const [orders, setOrders] = useState<IOrder[] | null>(null)
 
     const router = useRouter()
 
@@ -73,7 +75,7 @@ const Dashboard: React.FC<MyProps> = ({ setIsAuthed }) => {
             router.push("/admin")
         }
 
-    }, [userData])
+    }, [userData, router])
 
 
 
