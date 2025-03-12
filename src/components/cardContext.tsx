@@ -6,7 +6,7 @@ import { IProduct } from '@/model/ProductModel'
 
 const CardContext = createContext<{
     card: CardType[],
-    setCard: React.Dispatch<React.SetStateAction<any[]>>,
+    setCard: React.Dispatch<React.SetStateAction<CardType[]>>,
     addToCard: (product: IProduct) => void,
     removeFromCard: (productId: string) => void,
     incrementQuantity: (productId: string) => void,
@@ -21,7 +21,7 @@ const CardContext = createContext<{
 })
 
 
-const CardProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+const CardProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [card, setCard] = useState<CardType[]>([]);
 
     const addToCard = (product: IProduct) => {

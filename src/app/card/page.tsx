@@ -71,13 +71,18 @@ const Card: React.FC = () => {
                 toast.error(response.data.msg)
             }
         }
-        catch (err: any) {
-            toast.error(`Catch error ${err.message}`)
-            console.log(err)
+        catch (err: unknown) {
+            if (err instanceof Error) {
+                toast.error(`catch err ${err.message}`)
+                console.error(err)
+            } else {
+                toast.error("Unknown error occurred")
+                console.error("Unknown error:", err)
+            }
         }
     }
 
-    const handleDecremet = async (productId: any) => {
+    const handleDecremet = async (productId: string) => {
 
         try {
             const response = await axios.post("/api/user/card/incAndDec",
@@ -98,14 +103,19 @@ const Card: React.FC = () => {
                 toast.error(response.data.msg)
             }
         }
-        catch (err: any) {
-            toast.error(`Catch error ${err.message}`)
-            console.log(err)
+        catch (err: unknown) {
+            if (err instanceof Error) {
+                toast.error(`catch err ${err.message}`)
+                console.error(err)
+            } else {
+                toast.error("Unknown error occurred")
+                console.error("Unknown error:", err)
+            }
         }
 
     }
 
-    const handleRemove = async (productId: any) => {
+    const handleRemove = async (productId: string) => {
 
         setRemoveBtnLoading(true)
 
@@ -126,9 +136,14 @@ const Card: React.FC = () => {
                 toast.error(res.data.msg)
             }
         }
-        catch (err: any) {
-            toast.error(`Catch error ${err.message}`)
-            console.log(err)
+        catch (err: unknown) {
+            if (err instanceof Error) {
+                toast.error(`catch err ${err.message}`)
+                console.error(err)
+            } else {
+                toast.error("Unknown error occurred")
+                console.error("Unknown error:", err)
+            }
         }
 
         removeFromCard(productId)
@@ -180,7 +195,7 @@ const Card: React.FC = () => {
                                                 <Button
                                                     variant="contained"
                                                     className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px] w-[170px] mt-[10px]"
-                                                    onClick={() => handleRemove(item.product._id)}
+                                                    onClick={() => handleRemove(item.product._id as string)}
                                                     loading={removeBtnLoading}
                                                 >
                                                     Remove
@@ -193,7 +208,7 @@ const Card: React.FC = () => {
                                                         <AddIcon sx={{ fontSize: 40 }} />
                                                     </span>
                                                     <span className="bg-purple-600 text-center px-[15px] py-[6px] text-[25px] rounded-[10px]">{item.quantity}</span>
-                                                    <span onClick={() => handleDecremet(item.product._id)}
+                                                    <span onClick={() => handleDecremet(item.product._id as string)}
                                                         className="cursor-pointer">
                                                         <RemoveIcon sx={{ fontSize: 40 }} />
                                                     </span>

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Product from '@/model/ProductModel';
 
 const MONGODB_URI = process.env.MONGODB_URI || '';
 
@@ -17,7 +16,7 @@ declare global {
 }
 
 // Global cache ашиглах
-let cached: MongooseCache = global.mongooseCache || { conn: null, promise: null };
+const cached: MongooseCache = global.mongooseCache || { conn: null, promise: null };
 
 async function connectToDatabase() {
   if (cached.conn) {

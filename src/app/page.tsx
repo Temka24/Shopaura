@@ -123,8 +123,8 @@ const Home: React.FC = () => {
           <div className="text-[30px]">Interested? This Shop Sneaker </div>
           <div className="text-[30px]">Collection</div>
           <p className="font-normal px-[15vw] text-center">
-            I appreciate SpectaStyle's commitment to sustainability. Their shoes are not only stylish but also environmentally friendly.
-            It's great to support a brand that cares about the planet.
+            I appreciate SpectaStyle commitment to sustainability. Their shoes are not only stylish but also environmentally friendly.
+            It is great to support a brand that cares about the planet.
           </p>
           <Button onClick={() => router.push("/shop")} variant="contained" className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px]">
             Shop Now

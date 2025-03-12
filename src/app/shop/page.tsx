@@ -51,8 +51,14 @@ const Shop: React.FC = () => {
                     toast.error(response.data.msg)
                 }
             }
-            catch (err: any) {
-                toast.error(`Catch error ${err.message}`)
+            catch (err: unknown) {
+                if (err instanceof Error) {
+                    toast.error(`catch err ${err.message}`)
+                    console.error(err)
+                } else {
+                    toast.error("Unknown error occurred")
+                    console.error("Unknown error:", err)
+                }
             }
 
             setIsLoading(false)
@@ -95,29 +101,33 @@ const Shop: React.FC = () => {
                     console.error(response.data)
                 }
     
-            } catch (err: any) {
-                console.error(err)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    toast.error(`catch err ${err.message}`)
+                    console.error(err)
+                } else {
+                    toast.error("Unknown error occurred")
+                    console.error("Unknown error:", err)
+                }
             }
         }
     
         fillCard()
     
-    }, [userData])
+    }, [userData, setCard])
 
     useEffect(() => {
         if (!products) { return }
 
-        var Allprices: number[] = [];
+        let Allprices: number[] = [];
         products.forEach((product) => Allprices.push(product.price as number))
 
-        var newMax = Math.max(...Allprices as number[])
-        var newMin = Math.min(...Allprices as number[])
+        let newMax = Math.max(...Allprices as number[])
+        let newMin = Math.min(...Allprices as number[])
 
         setMinPrice(newMin)
         setMaxPrice(newMax)
         setRangeVal([newMin, newMax])
-        
-        console.log(card)
 
     }, [products])
 
@@ -127,7 +137,7 @@ const Shop: React.FC = () => {
 
     const filterProducts = () => {
 
-        var filtered = products.filter((product) => (product.price >= rangeVal[0] && product.price <= rangeVal[1]));
+        let filtered = products.filter((product) => (product.price >= rangeVal[0] && product.price <= rangeVal[1]));
 
         if (searchText) {
             filtered = filtered.filter((item) => item.name?.toLowerCase().includes(searchText.toLowerCase()))
@@ -179,13 +189,18 @@ const Shop: React.FC = () => {
                 toast.error(res.data.msg)
             }
         }
-        catch (err: any) {
-            toast.error(`Catch error ${err.message}`)
-            console.log(err)
+        catch (err: unknown) {
+            if (err instanceof Error) {
+                toast.error(`catch err ${err.message}`)
+                console.error(err)
+            } else {
+                toast.error("Unknown error occurred")
+                console.error("Unknown error:", err)
+            }
         }
         setCardButtonLoading(false)
 
-        addToCard(slectedProduct)
+        addToCard(slectedProduct as IProduct)
         setSlectedProduct(null)
     }
 
@@ -254,7 +269,7 @@ const Shop: React.FC = () => {
                 <div className="grid lg:grid-cols-4 lg:gap-[30px] cu:gap-[10px] mt-[40px] cu:grid-cols-2 cu:px-[2vw] lg:scale-[1] cu:scale-[0.9]">
                     {
                         (!isLoading) ? (
-                            filterProducts().map((product: any, index: any) =>
+                            filterProducts().map((product: IProduct, index: number) =>
                                 <div key={index} onClick={() => setSlectedProduct(product)} className="flex flex-col justify-center items-start gap-[30px] rounded-[10px] p-[20px] bg-fuchsia-500">
                                     <div className="flex flex-col justify-center items-start ">
                                         <Image

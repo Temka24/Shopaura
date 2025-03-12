@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import toast from "react-hot-toast";
@@ -64,7 +64,7 @@ const Login: React.FC<MyProps> = ({ isOpenLogin, setIsOpenLogin, setIsAuthed }) 
                         Login
                     </Button>
                 </form>
-                <div>Don't have account <span onClick={(): void => setIsOpenLogin(!isOpenLogin)} className="text-fuchsia-700 cursor-pointer">Sign up</span></div>
+                <div>Don&apos;t have account <span onClick={(): void => setIsOpenLogin(!isOpenLogin)} className="text-fuchsia-700 cursor-pointer">Sign up</span></div>
             </div>
         </>
     )

@@ -5,15 +5,15 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
 import toast from "react-hot-toast";
-import { UserDataType } from "@/types/userTypes";
+import { UserDataType, CardType } from "@/types/userTypes";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 const Checkout: React.FC = () => {
 
-    const [delivery, setDelivery] = useState<{country: string, state: string; city: string, address: string; postalCode: string}>({ country: "", state: "", city: "", address: "", postalCode: "" })
+    const [delivery, setDelivery] = useState<{ country: string, state: string; city: string, address: string; postalCode: string }>({ country: "", state: "", city: "", address: "", postalCode: "" })
     const [userData, setUserData] = useState<UserDataType | null>(null)
-    const [cardItems, setCardItems] = useState<any[] | null>(null)
+    const [cardItems, setCardItems] = useState<CardType[] | null>(null)
     const [btnLoading, setBtnLoading] = useState<boolean>(false)
 
     useEffect(() => {
@@ -49,8 +49,14 @@ const Checkout: React.FC = () => {
                     console.log(response)
                 }
             }
-            catch (err: any) {
-                toast.error(`Catch error dont fetch: ${err.message}`)
+            catch (err: unknown) {
+                if (err instanceof Error) {
+                    toast.error(`catch err ${err.message}`)
+                    console.error(err)
+                } else {
+                    toast.error("Unknown error occurred")
+                    console.error("Unknown error:", err)
+                }
             }
         }
 
@@ -81,12 +87,16 @@ const Checkout: React.FC = () => {
             setBtnLoading(false)
             window.location.href = res.data.url;
 
-        } catch (err: any) {
-            // Алдаа гарсан үед түүний дэлгэрэнгүй мэдээллийг гаргах
-            console.error("Төлбөрийн процессийн алдаа:", err.message);
-            alert("Төлбөрийн процессийн үед алдаа гарлаа. Дахин оролдоно уу.");
-
-        } finally {
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                toast.error(`catch err ${err.message}`)
+                console.error(err)
+            } else {
+                toast.error("Unknown error occurred")
+                console.error("Unknown error:", err)
+            }
+        }
+        finally {
             setBtnLoading(false)
         }
     };
