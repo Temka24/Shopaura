@@ -19,7 +19,7 @@ import Button from '@mui/material/Button';
 
 const Shop: React.FC = () => {
 
-    const { addToCard, card, setCard } = useCard()
+    const { addToCard, setCard } = useCard()
 
     const [products, setProducts] = useState<IProduct[]>([])
     const [userData, setUserData] = useState<UserDataType | null>(null)
@@ -119,11 +119,11 @@ const Shop: React.FC = () => {
     useEffect(() => {
         if (!products) { return }
 
-        let Allprices: number[] = [];
+        const Allprices: number[] = [];
         products.forEach((product) => Allprices.push(product.price as number))
 
-        let newMax = Math.max(...Allprices as number[])
-        let newMin = Math.min(...Allprices as number[])
+        const newMax = Math.max(...Allprices as number[])
+        const newMin = Math.min(...Allprices as number[])
 
         setMinPrice(newMin)
         setMaxPrice(newMax)

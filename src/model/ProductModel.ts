@@ -1,4 +1,4 @@
-import mongoose, {model, models, Document, Schema } from "mongoose";
+import { model, models, Document, Schema } from "mongoose";
 
 export interface IProduct extends Document {
     name: string;
