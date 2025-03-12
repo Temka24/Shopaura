@@ -25,8 +25,13 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ msg: "success", orders: currentOrders, status: true })
 
     }
-    catch (err: any) {
-        console.error(err)
-        return NextResponse.json({ msg: `catch error ${err.message}`, status: false })
+    catch (err: unknown) {
+        if (err instanceof Error) {
+            console.log(err)
+            return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+        } else {
+            console.log(err)
+            return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+        }
     }
 }

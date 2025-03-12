@@ -64,8 +64,13 @@ export async function POST(req: NextRequest) {
         const token = jwt.sign({ id: newUser._id }, SecretKey, { expiresIn: '1d' })
         return NextResponse.json({ msg: "Success signed up", user: { id: newUser._id, name: name, email: email, imageUrl: imageUrl }, token: token, status: true })
     }
-    catch (err: any) {
-        console.log(err)
-        return NextResponse.json({ msg: err.message, status: false })
+    catch (err: unknown) {
+        if (err instanceof Error) {
+            console.log(err)
+            return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+        } else {
+            console.log(err)
+            return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+        }
     }
 }

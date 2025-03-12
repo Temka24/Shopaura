@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import Stripe from "stripe";
 import connectToDatabase from "@/lib/mongodb";
 import Order from "@/model/OrderModel";
+import { CardType } from "@/types/userTypes";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     apiVersion: "2025-01-27.acacia",
@@ -17,7 +18,7 @@ export async function POST(req: NextRequest) {
         await connectToDatabase()
 
         const newOrder = new Order({
-            items: cardItems.map((item: any) => {
+            items: cardItems.map((item: CardType) => {
                 return {
                     product: item.product._id,
                     quantity: item.quantity
@@ -44,7 +45,7 @@ export async function POST(req: NextRequest) {
                 orderId: String(newOrder._id),
                 userId: String(userId)
             },
-            line_items: cardItems.map((item: any) => ({
+            line_items: cardItems.map((item: CardType) => ({
                 price_data: {
                     currency: "usd",
                     product_data: {

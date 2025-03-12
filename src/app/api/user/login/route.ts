@@ -33,8 +33,13 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ msg: "Password is not correct !", status: false })
         }
     }
-    catch (err: any) {
-        console.log(err)
-        return NextResponse.json({ msg: err.message })
+    catch (err: unknown) {
+        if (err instanceof Error) {
+            console.log(err)
+            return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+        } else {
+            console.log(err)
+            return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+        }
     }
 }

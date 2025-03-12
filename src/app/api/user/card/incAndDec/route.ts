@@ -41,7 +41,13 @@ export async function POST(req: NextRequest) {
         }
 
     }
-    catch (err: any) {
-        return NextResponse.json({ msg: `Catch error ${err.message}`, status: false })
+    catch (err: unknown) {
+        if (err instanceof Error) {
+            console.log(err)
+            return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+        } else {
+            console.log(err)
+            return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+        }
     }
 }

@@ -1,10 +1,31 @@
 import mongoose, { Schema, model, models, Document } from "mongoose";
+import { IProduct } from "./ProductModel";
+
+export interface IOrderItem {
+    product: mongoose.Types.ObjectId;
+    quantity: number;
+}
+
+export interface IOrderItemPopulated {
+    product: IProduct;
+    quantity: number;
+}
 
 export interface IOrder extends Document {
-    items: {
-        product: mongoose.Types.ObjectId;
-        quantity: number;
-    }[];
+    items: IOrderItem[];
+    delivery: {
+        buyer: mongoose.Types.ObjectId;
+        country: string;
+        state: string;
+        city: string;
+        address: string;
+        postalCode: string;
+    };
+    status: string;
+}
+
+export interface IOrderPopulated extends Document{
+    items: IOrderItemPopulated[];
     delivery: {
         buyer: mongoose.Types.ObjectId;
         country: string;

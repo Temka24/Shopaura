@@ -17,9 +17,15 @@ export async function POST(req: NextRequest) {
     try {
         const rawBody = await req.text();
         event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
-    } catch (err: any) {
-        console.error("Webhook signature verification failed.", err.message);
-        return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
+    } 
+    catch (err: unknown) {
+        if (err instanceof Error) {
+            console.error("Webhook signature verification failed.", err.message);
+            return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+        } else {
+            console.log(err)
+            return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+        }
     }
 
     if (event.type === "checkout.session.completed" || event.type === "payment_intent.succeeded") {
@@ -50,9 +56,14 @@ export async function POST(req: NextRequest) {
 
             console.log("Success Bro")
         }
-        catch (error) {
-            console.error("Error creating order:", error);
-            return new NextResponse("Error creating order", { status: 500 });
+        catch (err: unknown) {
+            if (err instanceof Error) {
+                console.error("Webhook failed.", err.message);
+                return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+            } else {
+                console.log(err)
+                return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+            }
         }
     }
 

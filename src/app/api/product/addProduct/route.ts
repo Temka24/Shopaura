@@ -50,11 +50,16 @@ export async function POST(req: NextRequest) {
         })
 
         await newProduct.save();
-        return NextResponse.json({ msg: 'Product saved success ', status: true})
+        return NextResponse.json({ msg: 'Product saved success ', status: true })
     }
-    catch (err: any) {
-        console.log(err)
-        return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+    catch (err: unknown) {
+        if (err instanceof Error) {
+            console.log(err)
+            return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+        } else {
+            console.log(err)
+            return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+        }
     }
 
 }

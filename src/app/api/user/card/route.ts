@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/model/UserModel";
-import Product from "@/model/ProductModel";
 import connectToDatabase from "@/lib/mongodb";
 
 export async function GET(req: NextRequest) {
@@ -26,9 +25,14 @@ export async function GET(req: NextRequest) {
         }
 
         return NextResponse.json({ msg: 'Success', status: true, items: items })
-    } catch (err: any) {
-        console.log(err)
-        return NextResponse.json({ msg: `Catch err ${err}` })
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            console.log(err)
+            return NextResponse.json({ msg: `It's catch error ${err}`, status: false })
+        } else {
+            console.log(err)
+            return NextResponse.json({ msg: `It's unknown error ${err}`, status: false })
+        }
     }
 }
 

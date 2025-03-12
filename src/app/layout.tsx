@@ -8,6 +8,9 @@ import { Toaster } from 'react-hot-toast'
 
 const roboto = Roboto_Mono({
   subsets: ['latin'],
+  weight: ["400", "600"],
+  preload: true,
+  display: 'swap',
 })
 
 export const metadata: Metadata = {

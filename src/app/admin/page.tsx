@@ -5,7 +5,7 @@ import Image from 'next/image';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { UserDataType } from '@/types/userTypes';
-import { IOrder } from '@/model/OrderModel';
+import { IOrderPopulated, IOrderItemPopulated } from '@/model/OrderModel';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -36,7 +36,7 @@ const VisuallyHiddenInput = styled('input')({
 const Admin: React.FC<MyProps> = () => {
 
     const [userData, setUserData] = useState<UserDataType | null>(null)
-    const [orders, setOrders] = useState<IOrder[] | null>(null)
+    const [orders, setOrders] = useState<IOrderPopulated[] | null>(null)
 
     const [productName, setProductName] = useState<string>('')
     const [productPrice, setProductPrice] = useState('')
@@ -88,9 +88,14 @@ const Admin: React.FC<MyProps> = () => {
                     console.log(res)
                 }
 
-            } catch (err: any) {
-                toast.error(`catch err ${err.message}`)
-                console.error(err)
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    toast.error(`catch err ${err.message}`)
+                    console.error(err)
+                } else {
+                    toast.error("Unknown error occurred")
+                    console.error("Unknown error:", err)
+                }
             }
         }
 
@@ -228,7 +233,7 @@ const Admin: React.FC<MyProps> = () => {
                             />
                             {previewImage && (
                                 <div className="mt-4">
-                                    <Image 
+                                    <Image
                                         src={previewImage}
                                         alt='preview'
                                         className='w-[30px] h-[30px] object-cover rounded-[50%]'
@@ -273,7 +278,7 @@ const Admin: React.FC<MyProps> = () => {
                                 width={300}
                             />
                         ) : (
-                            orders.map((order: any, index: any) =>
+                            orders.map((order: IOrderPopulated, index: number) =>
                                 <div className='relative h-auto py-[40px] w-[70vw] rounded-[30px] shadow-[0_0_10px] shadow-sky-300 flex flex-row items-center justify-center gap-[10vw]' key={index}>
                                     <div className='flex flex-col items-start justify-center gap-[6px]'>
                                         <div>Country: <span className='font-normal'>{order.delivery.country}</span></div>
@@ -284,10 +289,11 @@ const Admin: React.FC<MyProps> = () => {
                                     </div>
                                     <div className='flex flex-col items-start justify-center gap-[10px]'>
                                         {
-                                            order?.items?.map((item: any, index: any) =>
+                                            order?.items?.map((item: IOrderItemPopulated, index: number) =>
+                                                
                                                 <div key={index} className='flex flex-row items-center justify-center gap-[4vw]'>
                                                     <Image
-                                                        src={item.product.productImage || null}
+                                                        src={item.product.productImage || "/vectorPos-removebg-preview.png"}
                                                         alt='product'
                                                         height={60}
                                                         width={60}
