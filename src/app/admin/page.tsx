@@ -15,10 +15,6 @@ import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Divider from '@mui/material/Divider';
 
-interface MyProps {
-    setIsAuthed: React.Dispatch<React.SetStateAction<boolean>>
-}
-
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -33,7 +29,7 @@ const VisuallyHiddenInput = styled('input')({
 
 
 
-const Admin: React.FC<MyProps> = () => {
+const Admin: React.FC = () => {
 
     const [userData, setUserData] = useState<UserDataType | null>(null)
     const [orders, setOrders] = useState<IOrderPopulated[] | null>(null)
