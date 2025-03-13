@@ -85,6 +85,8 @@ const Signup: React.FC<MyProps> = ({ isOpenLogin, setIsOpenLogin, setIsAuthed })
                     <div className="mt-4">
                         <Image
                             src={previewImage}
+                            height={200}
+                            width={200}
                             alt='preview'
                             className='w-[30px] h-[30px] object-cover rounded-[50%]'
                         />
