@@ -29,7 +29,18 @@ const Home: React.FC = () => {
           <div className="flex flex-col text-[45px]">
             <p>Amazing Variety</p><p>Of Sneakers Starting</p><p>Just $50</p>
           </div>
-          <Button onClick={() => router.push("/shop")} variant="contained" className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px]">
+          <Button
+            variant="contained"
+            onClick={() => router.push("/shop")}
+            sx={{
+              borderRadius: '20px',
+              padding: '10px 30px', // py-[10px] ба px-[30px]
+              fontWeight: 'bold',
+              boxShadow: 'none',
+              backgroundColor: '#d946ef',
+              fontSize: '13px',
+            }}
+          >
             shop now
           </Button>
           <Tilt className="absolute right-[11vw] lg:mt-[-200px]" tiltMaxAngleX={10} tiltMaxAngleY={10} transitionSpeed={200} >
@@ -126,8 +137,19 @@ const Home: React.FC = () => {
             I appreciate SpectaStyle commitment to sustainability. Their shoes are not only stylish but also environmentally friendly.
             It is great to support a brand that cares about the planet.
           </p>
-          <Button onClick={() => router.push("/shop")} variant="contained" className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px]">
-            Shop Now
+          <Button
+            variant="contained"
+            onClick={() => router.push("/shop")}
+            sx={{
+              borderRadius: '20px',
+              padding: '10px 30px', // py-[10px] ба px-[30px]
+              fontWeight: 'bold',
+              boxShadow: 'none',
+              backgroundColor: '#d946ef',
+              fontSize: '13px',
+            }}
+          >
+            shop now
           </Button>
         </div>
 
