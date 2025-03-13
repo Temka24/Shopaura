@@ -32,7 +32,15 @@ const About: React.FC = () => {
                             showcasing the latest trends and timeless classics. From casual kicks to elegant heels,
                             find your perfect pair and step into fashion-forward confidence with us.
                         </div>
-                        <Button onClick={() => router.push("/contact")} variant="contained" className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px]">
+                        <Button onClick={() => router.push("/contact")} variant="contained"
+                            sx={{
+                                borderRadius: '20px',
+                                padding: '10px 30px', // py-[10px] ба px-[30px]
+                                fontWeight: 'bold',
+                                boxShadow: 'none',
+                                backgroundColor: '#d946ef',
+                                fontSize: '13px',
+                            }}>
                             contact us
                         </Button>
                     </div>
@@ -63,7 +71,15 @@ const About: React.FC = () => {
                         style, and durability.
                         Join us on our remarkable shoe journey as we strive to make every step you take a stylish and comfortable one
                     </div>
-                    <Button onClick={() => router.push("/shop")} variant="contained" className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px]">
+                    <Button onClick={() => router.push("/shop")} variant="contained"
+                        sx={{
+                            borderRadius: '20px',
+                            padding: '10px 30px', // py-[10px] ба px-[30px]
+                            fontWeight: 'bold',
+                            boxShadow: 'none',
+                            backgroundColor: '#d946ef',
+                            fontSize: '13px',
+                        }}>
                         shop now
                     </Button>
                 </div>

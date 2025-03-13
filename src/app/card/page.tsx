@@ -171,7 +171,14 @@ const Card: React.FC = () => {
                                 </div>
                                 <Button
                                     variant="contained"
-                                    className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px] w-[170px] mt-[10px]"
+                                    sx={{
+                                        borderRadius: '20px',
+                                        padding: '10px 30px', // py-[10px] ба px-[30px]
+                                        fontWeight: 'bold',
+                                        boxShadow: 'none',
+                                        backgroundColor: '#d946ef',
+                                        fontSize: '13px',
+                                    }}
                                     onClick={() => router.push("/shop")}
                                 >
                                     Go to Shop
@@ -194,7 +201,14 @@ const Card: React.FC = () => {
                                                 <div>Price: {item.product.price}$</div>
                                                 <Button
                                                     variant="contained"
-                                                    className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px] w-[170px] mt-[10px]"
+                                                    sx={{
+                                                        borderRadius: '20px',
+                                                        padding: '10px 30px', // py-[10px] ба px-[30px]
+                                                        fontWeight: 'bold',
+                                                        boxShadow: 'none',
+                                                        backgroundColor: '#d946ef',
+                                                        fontSize: '13px',
+                                                    }}
                                                     onClick={() => handleRemove(item.product._id as string)}
                                                     loading={removeBtnLoading}
                                                 >
@@ -220,7 +234,14 @@ const Card: React.FC = () => {
                                 <div className="ml-[60vw] rounded-[20px] py-[10px] px-[20px] bg-violet-500 shadow-[0_0_4px] shadow-sky-300"><span className="font-normal">OverAll: </span>{overAllPrice}$</div>
                                 <Button
                                     variant="contained"
-                                    className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px] w-[170px] mb-[50px] mt-[-30px]"
+                                    sx={{
+                                        borderRadius: '20px',
+                                        padding: '10px 30px', // py-[10px] ба px-[30px]
+                                        fontWeight: 'bold',
+                                        boxShadow: 'none',
+                                        backgroundColor: '#d946ef',
+                                        fontSize: '13px',
+                                    }}
                                     onClick={() => router.push("/card/checkout")}
                                 >
                                     Buy

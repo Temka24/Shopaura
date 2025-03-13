@@ -93,7 +93,14 @@ const Dashboard: React.FC<MyProps> = ({ setIsAuthed }) => {
                     <Button
                         variant="contained"
                         endIcon={<CheckIcon />}
-                        className='bg-blue-500 rounded-[20px]'
+                        sx={{
+                            borderRadius: '20px',
+                            padding: '10px 30px', // py-[10px] ба px-[30px]
+                            fontWeight: 'bold',
+                            boxShadow: 'none',
+                            backgroundColor: '#d946ef',
+                            fontSize: '13px',
+                        }}
                         onClick={() => {
                             localStorage.clear();
                             setIsAuthed(false)
@@ -123,7 +130,14 @@ const Dashboard: React.FC<MyProps> = ({ setIsAuthed }) => {
                             type='submit'
                             variant="contained"
                             endIcon={<LogoutIcon />}
-                            className='bg-fuchsia-500 rounded-[20px] mt-[50px] px-[30px] py-[10px]'
+                            sx={{
+                                borderRadius: '20px',
+                                padding: '10px 30px', // py-[10px] ба px-[30px]
+                                fontWeight: 'bold',
+                                boxShadow: 'none',
+                                backgroundColor: '#d946ef',
+                                fontSize: '13px',
+                            }}
                         >
                             Log out
                         </Button>

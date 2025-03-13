@@ -106,7 +106,14 @@ const Admin: React.FC = () => {
                     <Button
                         variant="contained"
                         endIcon={<CheckIcon />}
-                        className='bg-blue-500 rounded-[20px]'
+                        sx={{
+                            borderRadius: '20px',
+                            padding: '10px 30px', // py-[10px] ба px-[30px]
+                            fontWeight: 'bold',
+                            boxShadow: 'none',
+                            backgroundColor: '#d946ef',
+                            fontSize: '13px',
+                        }}
                         onClick={() => {
                             localStorage.clear();
                             router.push("/account")
@@ -174,7 +181,14 @@ const Admin: React.FC = () => {
                             type='submit'
                             variant="contained"
                             endIcon={<LogoutIcon />}
-                            className='bg-fuchsia-500 rounded-[20px] mt-[50px] px-[30px] py-[10px]'
+                            sx={{
+                                borderRadius: '20px',
+                                padding: '10px 30px', // py-[10px] ба px-[30px]
+                                fontWeight: 'bold',
+                                boxShadow: 'none',
+                                backgroundColor: '#d946ef',
+                                fontSize: '13px',
+                            }}
                         >
                             Log out
                         </Button>
@@ -242,6 +256,14 @@ const Admin: React.FC = () => {
                                 variant="contained"
                                 tabIndex={-1}
                                 startIcon={<CloudUploadIcon />}
+                                sx={{
+                                    borderRadius: '20px',
+                                    padding: '10px 30px', // py-[10px] ба px-[30px]
+                                    fontWeight: 'bold',
+                                    boxShadow: 'none',
+                                    backgroundColor: '#d946ef',
+                                    fontSize: '13px',
+                                }}
                             >
                                 Image
                                 <VisuallyHiddenInput
@@ -254,7 +276,14 @@ const Admin: React.FC = () => {
                             <Button
                                 variant="contained"
                                 type="submit"
-                                className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px]"
+                                sx={{
+                                    borderRadius: '20px',
+                                    padding: '10px 30px', // py-[10px] ба px-[30px]
+                                    fontWeight: 'bold',
+                                    boxShadow: 'none',
+                                    backgroundColor: '#d946ef',
+                                    fontSize: '13px',
+                                }}
                                 loading={isLoading}
                             >
                                 Add product

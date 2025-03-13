@@ -82,13 +82,13 @@ const Shop: React.FC = () => {
         }
 
     }, [])
-    
+
     useEffect(() => {
-    
+
         if (!userData) {
             return;
         }
-    
+
         const fillCard = async () => {
             try {
                 const response = await axios.get(`/api/user/card?userId=${userData.id}`);
@@ -100,7 +100,7 @@ const Shop: React.FC = () => {
                     toast.error(response.data.msg)
                     console.error(response.data)
                 }
-    
+
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     toast.error(`catch err ${err.message}`)
@@ -111,9 +111,9 @@ const Shop: React.FC = () => {
                 }
             }
         }
-    
+
         fillCard()
-    
+
     }, [userData, setCard])
 
     useEffect(() => {
@@ -226,7 +226,7 @@ const Shop: React.FC = () => {
                         />
                         <div className="flex flex-row items-center justify-center gap-[278px] ml-[-5px]"><p>{minPrice}$</p><p>{maxPrice}$</p></div>
                     </div>
-                    <SearchIcon className="absolute lg:ml-[120px] mt-[3px] cu:ml-[80px]"/>
+                    <SearchIcon className="absolute lg:ml-[120px] mt-[3px] cu:ml-[80px]" />
                     <input
                         type="search"
                         className="focus:outline-none border border-black bg-transparent rounded-[10px] h-[30px] w-[300px] px-[5px] py-[4px] pl-[40px] placeholder:text-gray-600"
@@ -312,12 +312,19 @@ const Shop: React.FC = () => {
                                 <div><span className="font-[1000]">Product ID:</span> {slectedProduct._id as string}</div>
                                 <div>Price: {slectedProduct.price} $</div>
                                 <div>Description: {slectedProduct.description}</div>
-                                <div>Date: {slectedProduct.createdAt ? new Date(slectedProduct.createdAt).toLocaleDateString(): "Unknown"}</div>
+                                <div>Date: {slectedProduct.createdAt ? new Date(slectedProduct.createdAt).toLocaleDateString() : "Unknown"}</div>
                                 <Button
                                     variant="contained"
-                                    className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px] w-[80%]"
                                     onClick={handleAddToCard}
                                     loading={cardButtonLoading}
+                                    sx={{
+                                        borderRadius: '20px',
+                                        padding: '10px 30px', // py-[10px] ба px-[30px]
+                                        fontWeight: 'bold',
+                                        boxShadow: 'none',
+                                        backgroundColor: '#d946ef',
+                                        fontSize: '13px',
+                                    }}
                                 >
                                     Add to Card
                                 </Button>

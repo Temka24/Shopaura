@@ -15,7 +15,7 @@ const Map = dynamic(() => import("@/components/map"), { ssr: false, loading: () 
 
 const Contact: React.FC = () => {
 
-    const [formData, setFormData] = useState<{name: string, email: string, message: string;}>({ name: '', email: '', message: '' })
+    const [formData, setFormData] = useState<{ name: string, email: string, message: string; }>({ name: '', email: '', message: '' })
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -105,7 +105,15 @@ const Contact: React.FC = () => {
                                     required
                                     placeholder='message'
                                 />
-                                <Button type='submit' variant="contained" endIcon={<SendIcon />} className='bg-violet-500 rounded-[20px]'>
+                                <Button type='submit' variant="contained" endIcon={<SendIcon />}
+                                    sx={{
+                                        borderRadius: '20px',
+                                        padding: '10px 30px', // py-[10px] ба px-[30px]
+                                        fontWeight: 'bold',
+                                        boxShadow: 'none',
+                                        backgroundColor: '#d946ef',
+                                        fontSize: '13px',
+                                    }}>
                                     Send
                                 </Button>
                             </div>

@@ -97,6 +97,14 @@ const Signup: React.FC<MyProps> = ({ isOpenLogin, setIsOpenLogin, setIsAuthed })
                         variant="contained"
                         tabIndex={-1}
                         startIcon={<CloudUploadIcon />}
+                        sx={{
+                            borderRadius: '20px',
+                            padding: '10px 30px', // py-[10px] ба px-[30px]
+                            fontWeight: 'bold',
+                            boxShadow: 'none',
+                            backgroundColor: '#d946ef',
+                            fontSize: '13px',
+                        }}
                     >
                         Profile Img
                         <VisuallyHiddenInput
@@ -130,7 +138,14 @@ const Signup: React.FC<MyProps> = ({ isOpenLogin, setIsOpenLogin, setIsAuthed })
                     <Button
                         variant="contained"
                         type="submit"
-                        className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px]"
+                        sx={{
+                            borderRadius: '20px',
+                            padding: '10px 30px', // py-[10px] ба px-[30px]
+                            fontWeight: 'bold',
+                            boxShadow: 'none',
+                            backgroundColor: '#d946ef',
+                            fontSize: '13px',
+                        }}
                         loading={isLoading}
                     >
                         Sign up

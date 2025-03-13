@@ -144,7 +144,14 @@ const Checkout: React.FC = () => {
                     />
                     <Button
                         variant="contained"
-                        className="rounded-[20px] px-[30px] py-[10px] font-bold shadow-none bg-fuchsia-500 text-[13px] w-[170px] mt-[10px]"
+                        sx={{
+                            borderRadius: '20px',
+                            padding: '10px 30px', // py-[10px] ба px-[30px]
+                            fontWeight: 'bold',
+                            boxShadow: 'none',
+                            backgroundColor: '#d946ef',
+                            fontSize: '13px',
+                        }}
                         type="submit"
                         loading={btnLoading}
                     >
